@@ -5,9 +5,12 @@ __pycache__/
 
 # C extensions
 *.so
+*.png
+Pipfile.lock
 
 # Distribution / packaging
 .Python
+files/
 build/
 develop-eggs/
 dist/
