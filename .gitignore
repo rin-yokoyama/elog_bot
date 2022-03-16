@@ -10,8 +10,11 @@ Pipfile.lock
 
 # Distribution / packaging
 .Python
-files/
+
+# Distribution / packaging
+.Python
 build/
+files/
 develop-eggs/
 dist/
 downloads/
