@@ -43,3 +43,4 @@ ELOG_UPASSWORD=elog_user_password
 - pipenv shell
 - python app.py
 - Add your slack bot to the channels you want to use.
+- Add :notebook: emoji as a reaction to the message you want to submit to the elog
