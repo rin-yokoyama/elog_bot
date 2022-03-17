@@ -41,6 +41,7 @@ def reaction_handler(event, say):
             )
             # channel name
             chan = result["channel"]["name"]
+            chan_id = result["channel"]["id"]
             # user name of the slack post
             user_id = message["user"]
             result = client.users_info(
@@ -53,11 +54,18 @@ def reaction_handler(event, say):
             )
             euser = result["user"]["real_name"]
 
+            # link to the message
+            permalink = "link not available"
+            result = client.chat_getPermalink(token=BOT_TOKEN, channel=chan_id, message_ts=message['ts'])
+            if result["ok"] == True:
+                permalink = result["permalink"]
+
             print(chan)
             print(user)
             print(euser)
             print(content)
             print(ts)
+            print(permalink)
             attfiles = []
             file_path = os.getcwd() + "/files/"
             if 'files' in message:
@@ -79,7 +87,11 @@ def reaction_handler(event, say):
                         say(f"<@{event['user']}>Error: Failed to download file {filename}")
 
             print(attfiles)
-            elog.post_entry(chan, user, euser, content, ts, attfiles)
+            elog_url = elog.post_entry(chan, user, euser, content, ts, permalink, attfiles)
+            if elog_url == None:
+                say(f"<@{event['user']}>Error in post_elog_entry(). The message was not submitted correctly. Check drafts in the elog")
+            else:
+                say(f"<@{event['user']}> The message has been submitted to the elog: {elog_url}")
 
         except SlackApiError as e:
             say(f"<@{event['user']}>Error: {e}")

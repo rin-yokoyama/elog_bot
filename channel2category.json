@@ -1,0 +1,13 @@
+{
+	"daq": "DAQ",
+	"f03": "BLD",
+	"fe07": "BLD",
+	"fe09": "BLD",
+	"fe10": "BLD",
+	"fe12": "BLD",
+	"s0": "TiNA",
+	"s1": "S1",
+	"s2": "S2",
+	"optics": "Optics",
+	"analysis": "Analysis"
+}
