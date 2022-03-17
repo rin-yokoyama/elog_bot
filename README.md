@@ -39,6 +39,19 @@ ELOG_UPASSWORD=elog_user_password
   - message.im
   - reaction_added
 
+## channel2category.json
+The file contains the dict of slack channel names to elog category name.
+If the channel name or the category name does not exist in the dict or in the elog, respectively,
+the category named "Slack" will be selected.
+If there was no category named "Slack" existed, the first category will be selected to prevent the elog error.
+```
+{
+  "slack_ch_name1": "elog_category_name",
+  "slack_ch_name2": "elog_category_name",
+  "slack_ch_name3": "elog_category_name"
+}
+```
+
 ## Usage
 - pipenv shell
 - python app.py

@@ -92,7 +92,9 @@ class ElogWriter:
 		# Clear and fill the main text
 		text_editor.click()
 		text_editor.clear()
-		text_editor.send_keys('Original message posted at '+ ts + '\n' + permalink + '\n' + content + '\n')
+		text_editor.send_keys('Original message posted at '+ ts + '\n')
+		text_editor.send_keys(permalink + '\n')
+		text_editor.send_keys(content + '\n')
 		# Take a screenshot for debugging
 		self.driver.save_full_page_screenshot('ss.png')
 		# Submit
