@@ -1,4 +1,6 @@
 import os
+import re
+import subprocess
 import requests
 import datetime
 from slack_bolt import App
@@ -83,18 +85,33 @@ def reaction_handler(event, say):
                         with open(filename ,mode='wb') as f: # write in byte type
                             f.write(urlData)
                         attfiles.append(filename)
+                        if re.match('.*\\.(png|jpg)+$', filename):
+                            cmd = 'convert -resize 1080x1080 ' + filename + ' ' + filename
+                            proc = subprocess.call(cmd,shell=True)
                     else:
                         say(f"<@{event['user']}>Error: Failed to download file {filename}")
 
             print(attfiles)
             elog_url = elog.post_entry(chan, user, euser, content, ts, permalink, attfiles)
             if elog_url == None:
-                say(f"<@{event['user']}>Error in post_elog_entry(). The message was not submitted correctly. Check drafts in the elog")
+                msg = f"<@{event['user']}>Error in post_elog_entry(). The message was not submitted correctly. Check drafts in the elog"
+                if __debug__:
+                    print(msg)
+                else:
+                    say(msg)
             else:
-                say(f"<@{event['user']}> The message has been submitted to the elog: {elog_url}")
+                msg = f"<@{event['user']}> The message has been submitted to the elog: {elog_url}"
+                if __debug__:
+                    print(msg)
+                else:
+                    say(msg)
 
         except SlackApiError as e:
-            say(f"<@{event['user']}>Error: {e}")
+            msg = f"<@{event['user']}>Error: {e}"
+            if __debug__:
+                print(msg)
+            else:
+                say(msg)
 
 # launching the app
 if __name__ == "__main__":
