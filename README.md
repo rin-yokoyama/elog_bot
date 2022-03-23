@@ -4,6 +4,7 @@ A slack bot to submit messages to elog
 ## Requirements
 - pipenv
 - firefox + geckodriver
+- convert command from the Imagemagick pacakge to resize image
 
 Operation confiremed on CentOS 7
 
