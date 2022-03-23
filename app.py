@@ -86,7 +86,7 @@ def reaction_handler(event, say):
                             f.write(urlData)
                         attfiles.append(filename)
                         if re.match('.*\\.(png|jpg)+$', filename):
-                            cmd = 'convert -resize 1080x1080 ' + filename + ' ' + filename
+                            cmd = 'convert -resize \"1080x1080>\" ' + filename + ' ' + filename
                             proc = subprocess.call(cmd,shell=True)
                     else:
                         say(f"<@{event['user']}>Error: Failed to download file {filename}")
