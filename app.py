@@ -1,6 +1,7 @@
 import os
 import re
 import subprocess
+import requests
 import datetime
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
@@ -84,7 +85,7 @@ def reaction_handler(event, say):
                         with open(filename ,mode='wb') as f: # write in byte type
                             f.write(urlData)
                         attfiles.append(filename)
-                        if re.match('.*\\.(png|jpg)+$', filename):
+                        if re.match('.*\\.(png|jpg)+$', filename, re.IGNORECASE):
                             cmd = 'convert -resize \"1080x1080>\" ' + filename + ' ' + filename
                             proc = subprocess.call(cmd,shell=True)
                     else:
